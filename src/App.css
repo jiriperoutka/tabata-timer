@@ -1,0 +1,195 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+.settings-panel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+  margin: 2rem 0 0 0;
+}
+
+.settings-panel label {
+  color: #fff;
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 8px rgba(44, 83, 100, 0.08);
+  transition: background 0.2s;
+}
+
+.settings-panel input {
+  margin-top: 0.7rem;
+  padding: 0.5rem 0.8rem;
+  border-radius: 0.5rem;
+  border: none;
+  font-size: 1.1rem;
+  background: rgba(255, 255, 255, 0.85);
+  color: #2c5364;
+  box-shadow: 0 1px 4px rgba(44, 83, 100, 0.07);
+  outline: none;
+  transition: box-shadow 0.2s, background 0.2s;
+}
+
+.settings-panel input:focus {
+  background: #ffd200;
+  box-shadow: 0 0 0 2px #f7971e;
+}
+
+.tabata-container {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 2rem;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  padding: 2rem 3rem;
+  text-align: center;
+  backdrop-filter: blur(8px);
+  max-width: 600px;
+  margin: 2rem auto;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1.2rem;
+}
+
+.progress-info span {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ffd200;
+  background: rgba(44, 83, 100, 0.25);
+  padding: 0.6rem 1.2rem;
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px rgba(44, 83, 100, 0.12);
+  border: 2px solid #ffd200;
+  letter-spacing: 1px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.countdown-circle {
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem auto;
+  position: relative;
+  box-shadow: 0 2px 12px rgba(44, 83, 100, 0.1);
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+/* Stage colors */
+.circle-white {
+  background: linear-gradient(135deg, #f8fafc 80%, #e2e8f0 100%);
+}
+
+.circle-red {
+  background: linear-gradient(135deg, #ef4444 80%, #fca5a5 100%);
+}
+
+.circle-green {
+  background: linear-gradient(135deg, #22c55e 80%, #bbf7d0 100%);
+}
+
+.circle-blue {
+  background: linear-gradient(135deg, #38bdf8 80%, #bae6fd 100%);
+}
+
+/* Number and label styles */
+.go-label,
+.big-count {
+  font-size: 5rem;
+  font-weight: bold;
+  color: #222;
+  margin-bottom: -0.3rem;
+}
+
+.circle-red .big-count,
+.circle-green .big-count,
+.circle-blue .big-count {
+  color: #222;
+}
+
+.stage-label {
+  font-size: 1.5rem;
+  color: #222;
+  font-weight: bold;
+  margin-top: 0rem;
+  text-shadow: none;
+}
+
+.circle-red .stage-label,
+.circle-green .stage-label,
+.circle-blue .stage-label {
+  color: #222;
+}
+
+.start-btn {
+  margin-top: 1.5rem;
+  padding: 1rem 2.5rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+  width: 100%;
+  max-width: 220px;
+}
+
+.restart-btn {
+  background: linear-gradient(90deg, #e2e8f0 0%, #ef4444 100%);
+  color: #fff;
+}
+
+.resume-btn {
+  background: linear-gradient(90deg, #22c55e 0%, #bbf7d0 100%);
+  color: #fff;
+}
+
+.pause-btn {
+  background: linear-gradient(90deg, #facc15 0%, #f59e42 100%);
+  color: #222;
+}
