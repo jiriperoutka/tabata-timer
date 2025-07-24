@@ -8,6 +8,37 @@
   </head>
   <body>
     <div id="root"></div>
+    <audio
+      id="beep-audio"
+      src="/sounds/beep.mp3"
+      preload="auto"
+      style="display: none"
+    ></audio>
+    <audio
+      id="siren-exercise-audio"
+      src="/sounds/siren-exercise.mp3"
+      preload="auto"
+      style="display: none"
+    ></audio>
+    <audio
+      id="siren-rest-audio"
+      src="/sounds/siren-rest.mp3"
+      preload="auto"
+      style="display: none"
+    ></audio>
     <script type="module" src="/src/main.jsx"></script>
+    <script>
+      // Use this function in your App.jsx
+      function playSound(id) {
+        const audio = document.getElementById(id);
+        if (audio) {
+          audio.currentTime = 0;
+          audio.play().catch(() => {});
+        }
+      }
+
+      // In your startTabata function or on the GO! click
+      playSound("beep-audio");
+    </script>
   </body>
 </html>
