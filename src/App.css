@@ -193,3 +193,41 @@
   background: linear-gradient(90deg, #facc15 0%, #f59e42 100%);
   color: #222;
 }
+
+.preset-btn {
+  background: #222;
+  color: #d2d2d2;
+  border: none;
+  border-radius: 0.7rem;
+  padding: 0.6rem 1.2rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  width: 60px; /* Fixed width */
+  height: 44px; /* Fixed height */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.preset-btn.active {
+  /* Default active color */
+  background: #ffd200;
+  color: #222;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(44, 83, 100, 0.12);
+}
+
+/* If you want the active color to match Set or Cycle, use these: */
+.preset-btn.active.set {
+  background: #ffd200; /* yellow for Set */
+  color: #222;
+}
+
+.preset-btn.active.cycle {
+  background: #ffd200; /* yellow for Cycle */
+  color: #222;
+}

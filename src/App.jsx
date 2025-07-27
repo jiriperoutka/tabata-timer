@@ -1,9 +1,12 @@
 import { useState, useRef, useEffect } from "react";
 import "./App.css";
 
-function playSound(src) {
-  const audio = new window.Audio(src);
-  audio.play();
+function playSound(id) {
+  const audio = document.getElementById(id);
+  if (audio) {
+    audio.currentTime = 0;
+    audio.play().catch(() => {});
+  }
 }
 
 const defaultSettings = {
@@ -27,13 +30,13 @@ function App() {
   useEffect(() => {
     if (!running || stage === "start" || stage === "done") return;
     if (timeLeft <= 3 && timeLeft > 0) {
-      playSound("/sounds/beep.mp3");
+      playSound("beep-audio");
     }
     if (timeLeft === 0) {
       if (stage === "exercise") {
-        playSound("/sounds/siren-exercise.mp3");
+        playSound("siren-exercise-audio");
       } else if (stage === "rest") {
-        playSound("/sounds/siren-rest.mp3");
+        playSound("siren-rest-audio");
       }
     }
     if (timeLeft <= 0) {
@@ -46,7 +49,7 @@ function App() {
 
   const nextStage = () => {
     if (stage === "initial") {
-      playSound("/sounds/siren-exercise.mp3"); // Play siren when exercise starts
+      playSound("siren-exercise-audio");
       setStage("exercise");
       setTimeLeft(settings.exerciseInterval);
     } else if (stage === "exercise") {
@@ -55,7 +58,7 @@ function App() {
     } else if (stage === "rest") {
       if (setCount < settings.sets) {
         setSetCount(setCount + 1);
-        playSound("/sounds/siren-exercise.mp3"); // Play siren for next exercise
+        playSound("siren-exercise-audio");
         setStage("exercise");
         setTimeLeft(settings.exerciseInterval);
       } else if (cycleCount < settings.cycles) {
@@ -68,7 +71,7 @@ function App() {
         setRunning(false);
       }
     } else if (stage === "recovery") {
-      playSound("/sounds/siren-exercise.mp3"); // Play siren for exercise after recovery
+      playSound("siren-exercise-audio");
       setStage("exercise");
       setTimeLeft(settings.exerciseInterval);
     }
@@ -142,68 +145,120 @@ function App() {
           </span>
         </div>
       </div>
-      <div className="settings-panel">
-        <label>
-          Initial Countdown:
-          <input
-            type="number"
-            name="initialCountdown"
-            value={settings.initialCountdown}
-            onChange={handleChange}
-            min={0}
-          />
-        </label>
-        <label>
-          Exercise Interval:
-          <input
-            type="number"
-            name="exerciseInterval"
-            value={settings.exerciseInterval}
-            onChange={handleChange}
-            min={1}
-          />
-        </label>
-        <label>
-          Rest Interval:
-          <input
-            type="number"
-            name="restInterval"
-            value={settings.restInterval}
-            onChange={handleChange}
-            min={1}
-          />
-        </label>
-        <label>
-          Number of Sets:
-          <input
-            type="number"
-            name="sets"
-            value={settings.sets}
-            onChange={handleChange}
-            min={1}
-          />
-        </label>
-        <label>
-          Recovery Interval:
-          <input
-            type="number"
-            name="recoveryInterval"
-            value={settings.recoveryInterval}
-            onChange={handleChange}
-            min={0}
-          />
-        </label>
-        <label>
-          Number of Cycles:
-          <input
-            type="number"
-            name="cycles"
-            value={settings.cycles}
-            onChange={handleChange}
-            min={1}
-          />
-        </label>
-      </div>
+      {stage === "start" && (
+        <div className="settings-panel">
+          <label>
+            Initial Countdown:
+            <div className="preset-row">
+              {[0, 10, 20, 30].map((val) => (
+                <button
+                  key={val}
+                  type="button"
+                  className={`preset-btn${
+                    settings.initialCountdown === val ? " active" : ""
+                  }`}
+                  onClick={() =>
+                    setSettings((s) => ({ ...s, initialCountdown: val }))
+                  }
+                >
+                  {val}
+                </button>
+              ))}
+            </div>
+          </label>
+          <label>
+            Exercise Interval:
+            <div className="preset-row">
+              {[20, 30, 40, 60].map((val) => (
+                <button
+                  key={val}
+                  type="button"
+                  className={`preset-btn${
+                    settings.exerciseInterval === val ? " active" : ""
+                  }`}
+                  onClick={() =>
+                    setSettings((s) => ({ ...s, exerciseInterval: val }))
+                  }
+                >
+                  {val}
+                </button>
+              ))}
+            </div>
+          </label>
+          <label>
+            Rest Interval:
+            <div className="preset-row">
+              {[10, 20, 30, 40].map((val) => (
+                <button
+                  key={val}
+                  type="button"
+                  className={`preset-btn${
+                    settings.restInterval === val ? " active" : ""
+                  }`}
+                  onClick={() =>
+                    setSettings((s) => ({ ...s, restInterval: val }))
+                  }
+                >
+                  {val}
+                </button>
+              ))}
+            </div>
+          </label>
+          <label>
+            Number of Sets:
+            <div className="preset-row">
+              {[3, 4, 6, 8].map((val) => (
+                <button
+                  key={val}
+                  type="button"
+                  className={`preset-btn${
+                    settings.sets === val ? " active set" : ""
+                  }`}
+                  onClick={() => setSettings((s) => ({ ...s, sets: val }))}
+                >
+                  {val}
+                </button>
+              ))}
+            </div>
+          </label>
+          <label>
+            Recovery Interval:
+            <div className="preset-row">
+              {[60, 120].map((val) => (
+                <button
+                  key={val}
+                  type="button"
+                  className={`preset-btn${
+                    settings.recoveryInterval === val ? " active" : ""
+                  }`}
+                  onClick={() =>
+                    setSettings((s) => ({ ...s, recoveryInterval: val }))
+                  }
+                >
+                  {val}
+                </button>
+              ))}
+            </div>
+          </label>
+          <label>
+            Number of Cycles:
+            <div className="preset-row">
+              {[3, 4, 5, 6].map((val) => (
+                <button
+                  key={val}
+                  type="button"
+                  className={`preset-btn${
+                    settings.cycles === val ? " active cycle" : ""
+                  }`}
+                  onClick={() => setSettings((s) => ({ ...s, cycles: val }))}
+                >
+                  {val}
+                </button>
+              ))}
+            </div>
+          </label>
+        </div>
+      )}
       {stage !== "start" && (
         <div
           style={{
